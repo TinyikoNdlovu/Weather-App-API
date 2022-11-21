@@ -17,7 +17,11 @@
     "react-dom": "18.0.0",
     "react-native": "0.69.5",
     "react-native-web": "~0.18.7",
+<<<<<<< HEAD
     "expo-linear-gradient": "~11.4.0"
+=======
+    "expo-location": "~14.3.0"
+>>>>>>> origin/main
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 
 import React, { useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ImageBackground, TextInput, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+=======
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import * as Location from 'expo-location';
+>>>>>>> origin/main
 
 import DateTime from './components/DateTime';
 import WeatherScroll from './components/WeatherScroll';
 
+<<<<<<< HEAD
 //onst img = require('./assets/background.jpg')
 
 export default function App() {
@@ -110,6 +117,44 @@ function imageselector(image,temp){
       </View>
     </LinearGradient>
    </ImageBackground>
+=======
+const API_KEY = '8ec1dc42ea52fda1122ba8c594c5dca6';
+
+const img = require('./assets/background.jpg')
+
+export default function App() {
+
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((success) => {
+      let {latitude, longitude } = success.coords;
+      fetchDataFromApi(latitude, longitude)
+    }, (err) => {
+      fetchDataFromApi("40.7128", "74.0060")
+    }) 
+      
+  }, [])
+
+  const fetchDataFromApi = (latitude, longitude) => {
+    if(latitude && longitude) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data => {
+
+      console.log(data)
+      setData(data)
+    })
+    }
+    
+  }
+
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={img} style={styles.image} >
+        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon} />
+        <WeatherScroll weatherData={data.daily} />
+      </ImageBackground>
+    </View>
+>>>>>>> origin/main
   );
 }
 
